@@ -53,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/to_grey"
-            android:text="LinDynEgal"></Button>
+            android:text="LinDynExt"></Button>
 
         <Button
             android:id="@+id/hea"
@@ -77,7 +77,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/only_red"
             android:layout_toRightOf="@+id/hea"
-            android:text="ColLinDynExp">
+            android:text="ColLinDynExt">
 
         </Button>
 
@@ -95,8 +95,8 @@
             android:id="@+id/change_toDiagram"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/reset"
-            android:layout_toRightOf="@+id/change_toSpidy"
+            android:layout_below="@+id/clde"
+            android:layout_toRightOf="@+id/chea"
             android:text="Change To Diag"></Button>
 
         <ImageView
@@ -116,8 +116,7 @@
             android:layout_alignParentLeft="true"
             android:layout_marginStart="7dp"
             android:layout_marginLeft="7dp"
-            android:layout_marginTop="78dp"
-            android:text="Something" />
+            android:layout_marginTop="78dp" />
 
 
     </RelativeLayout>

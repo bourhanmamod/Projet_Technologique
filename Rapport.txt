@@ -1,0 +1,41 @@
+La liste des fonctions implémentées: 
+
+- To_gray1: Première version de la fonction qui applique le filtre noir en utilisant get_pixel et set_pixel
+
+-To_gray2: Deuxième version qui utilise get_pixels et set_pixels pour récupérer et modifier un tableau de pixels
+
+-Only_red: Qui ne conserve que la couleur rouge d'une image et applique le filtre gris au reste de ses pixels
+
+-Colorize: Qui change la teinte d'une image.
+
+-HSVToColor: qui, partant d'un tableau de float hsv, renvoie un entier correspondant à la couleur en RGB
+
+-RGBToHSV: qui, partant des composants red, green et blue d'une couleur, modifie le tableau hsv
+
+- Reset: Qui réinitialise l'image à son état initial
+
+- LINDYNEGAL: Linear Dynamic Extention: Qui applique l'algo d'Extention Dynamique sur une image en gris
+
+-HISTEGAL: Fonction qui applique l'Algorithme d'Egalisation de l'Histogramme 
+
+COLLINDYNEXP: Coloured Linear Dynamic Extention qui applique l'algo d'Extention Dynamique sur une image en couleur
+
+CHANGE TO SPIDY: qui change l'image en celle de Spiderman
+
+CHANGE TO DIAG: qui change l'image en celle des diagrammes 
+
+
+Tailles des images:
+Diagramme: 500*250
+Spider-man: 1780*910
+
+
+
+Tests sur Xiaomi Mi A3, Android One, 6pouces
+
+Remarques: 
+-	Les fonctions HSVColor et RGBToColor écrites sont beaucoup plus efficaces que les fonctions du même nom de la classe Color
+-	Les fonctions implémentées peuvent être mieux optimisés
+-	L'application marche sur Android One mais ne marche pas sur Android 5.1.1
+
+
