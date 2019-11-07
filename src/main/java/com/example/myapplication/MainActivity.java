@@ -1,35 +1,84 @@
 package com.example.myapplication;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     Random r;
-
+    Bitmap bitmap, original,bit;
+    ImageView image;
+    TextView text;
     protected void onCreate(Bundle savedInstanceState) {
         r= new Random();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final ImageView image= (ImageView) findViewById(R.id.spidy);
-        Bitmap bitmap= BitmapFactory.decodeResource(getResources(),R.drawable.spidy);
-        final Bitmap original=bitmap.copy(bitmap.getConfig(),true);
-        final Bitmap bit=bitmap.copy(bitmap.getConfig(),true);
+        image= (ImageView) findViewById(R.id.color);
+
+        bitmap= BitmapFactory.decodeResource(getResources(),R.drawable.color);
+        original=bitmap.copy(bitmap.getConfig(),true);
+        bit=bitmap.copy(bitmap.getConfig(),true);
+        int N= bit.getWidth()* bit.getHeight();
+        text= (TextView) findViewById(R.id.textView);
+        text.setText("Size: " + N);
+
+
+
+
+
+
+
+        Button btn= (Button) findViewById(R.id.change_toSpidy);
+        btn.setOnClickListener(
+                new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bitmap= BitmapFactory.decodeResource(getResources(),R.drawable.spidy);
+                original=bitmap.copy(bitmap.getConfig(),true);
+                bit=bitmap.copy(bitmap.getConfig(),true);
+                image.setImageBitmap(bit);
+                int N= bit.getWidth()* bit.getHeight();
+                text= (TextView) findViewById(R.id.textView);
+                text.setText("Size: " + N);
+
+
+            }
+        });
+
+        Button btn0= (Button) findViewById(R.id.change_toDiagram);
+        btn0.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        bitmap= BitmapFactory.decodeResource(getResources(),R.drawable.color);
+                        original=bitmap.copy(bitmap.getConfig(),true);
+                        bit=bitmap.copy(bitmap.getConfig(),true);
+                        image.setImageBitmap(bit);
+                        int N= bit.getWidth()* bit.getHeight();
+                        text.setText("Size: " + N);
+
+
+                    }
+                });
+
 
         Button btn1= (Button) findViewById(R.id.only_red);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hea(bit);
+                only_red(bit);
 
             }
         });
@@ -76,11 +125,42 @@ public class MainActivity extends AppCompatActivity {
         btn6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                lde(bit);
+
+            }
+        });
+
+        Button btn7= (Button) findViewById(R.id.clde);
+        btn7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                colored_lde(bit);
+
+            }
+        });
+
+        Button btn8= (Button) findViewById(R.id.hea);
+        btn8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 hea(bit);
 
             }
         });
+
+        Button btn9= (Button) findViewById(R.id.chea);
+        btn9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                colored_hea(bit);
+
+            }
+        });
+
+
         image.setImageBitmap(bit);
+
+
 
 
     }
@@ -125,14 +205,10 @@ public class MainActivity extends AppCompatActivity {
             b.setPixels(pixels,0,width,0,0,width,height);
         }
 //A MODIFIER
-int[] RGBToHSV(int color){
-       int[] hsv= new int[3];
-        int alpha = (color >> 24) & 0xff;
-        int red = (color >> 16) & 0xff;
-        int green = (color >> 8) & 0xff;
-        int blue = (color) & 0xff;
-        int min= Math.min(red,Math.min(green,blue));
-        int max=Math.max(red,Math.max(green,blue));
+void RGBToHSV(int red,int green, int blue, float[] hsv){
+
+        float min= Math.min(red,Math.min(green,blue));
+        float max=Math.max(red,Math.max(green,blue));
         if (max==min){
             hsv[0]=0;
         }
@@ -154,31 +230,32 @@ int[] RGBToHSV(int color){
             hsv[1]=1-(min/max);
         }
         hsv[2]=max;
-        return hsv;
 }
 
-int HSVToColor(int[] hsv){
-    int t= (hsv[0]/60)%6;
-    int f= (hsv[0]/60)-t;
-    int l= hsv[2]*(1-hsv[1]);
-    int m= hsv[2]*(1-(f-hsv[1]));
-    int n=hsv[2]*(1-(1-f)*hsv[1]);
+int HSVToColor(float[] hsv){
+    int v= (int) hsv[2];
+    int t=(int) ((hsv[0]/60)%6);
+    int f= (int) ((hsv[0]/60)-t);
+    int  l= (int) (v*(1-hsv[1]));
+    int m= (int) (v*(1-(f-hsv[1])));
+    int n=(int) (v*(1-(1-f)*hsv[1]));
+
     if(t==0){
-        return Color.rgb(hsv[2],n,l);
+        return Color.rgb(v,n,l);
     }
     else if(t==1){
-        return Color.rgb(m,hsv[2],l);
+        return Color.rgb(m,v,l);
     }
     else if(t==2){
-        return Color.rgb(l,hsv[2],n);
+        return Color.rgb(l, v,n);
     }
     else if(t==3){
-        return Color.rgb(l,m,hsv[2]);
+        return Color.rgb(l,m,v);
     }
     else if(t==4){
-        return Color.rgb(n,l,hsv[2]);
+        return Color.rgb(n,l,v);
     }
-        return Color.rgb(hsv[2],l,m);
+        return Color.rgb(v,l,m);
 }
 
     void only_red(Bitmap b){
@@ -193,7 +270,7 @@ int HSVToColor(int[] hsv){
             int red = (color >> 16) & 0xff;
             int green = (color >> 8) & 0xff;
             int blue = (color) & 0xff;
-            Color.RGBToHSV(red, green, blue, hsv);
+            RGBToHSV(red, green, blue, hsv);
 
             if (hsv[0] > 15 && hsv[0]<345) {
                 double grey = 0.3 * red + 0.59 * green + 0.11 * blue;
@@ -209,6 +286,7 @@ int HSVToColor(int[] hsv){
             int height= b.getHeight();
             int width= b.getWidth();
             int[] pixels= new int[height*width];
+            float random= r.nextInt(360);
             b.getPixels(pixels,0,width,0,0,width,height);
             float[] hsv= new float[3];
             for(int i=0; i<height*width-1; i=i+1) {
@@ -218,10 +296,7 @@ int HSVToColor(int[] hsv){
                 int green = (color >> 8) & 0xff;
                 int blue = (color) & 0xff;
 
-                Color.RGBToHSV(red,green,  blue, hsv);
-
-
-                float random= r.nextInt(360);
+                RGBToHSV(red,green,  blue, hsv);
                 hsv[0]= random;
                 pixels[i]=Color.HSVToColor(hsv);
             }
@@ -265,7 +340,8 @@ int HSVToColor(int[] hsv){
             b.setPixels(pixels,0,width,0,0,width,height);
         }
 
-        void reset (Bitmap original, Bitmap b){
+
+    void reset (Bitmap original, Bitmap b){
             int height = b.getHeight();
             int width = b.getWidth();
             int[] pixels = new int[height * width];
@@ -342,24 +418,71 @@ int HSVToColor(int[] hsv){
         int height = b.getHeight();
         int width = b.getWidth();
         int[] pixels = new int[height * width];
-        long C=0;
+        int C=0;
         b.getPixels(pixels, 0, width, 0, 0, width, height);
-        int[] histogramm = new int[256];
+        int[] histo = new int[256];
         for (int i = 0; i < height * width; i = i + 1) {
             int color = pixels[i];
             int red = (color >> 16) & 0xff;
-            histogramm[red] = histogramm[red] + 1;
+            histo[red] = histo[red] + 1;
         }
         for (int i = 0; i < height * width; i = i + 1) {
             C=0;
             int color = pixels[i];
             int red = (color >> 16) & 0xff;
 
-            for (int j=1; j<=red; i=i+1){
-                C=histogramm[j]+C;
+            for (int j=0; j<red; j=j+1){
+                C=histo[j]+C;
             }
+
             long result= (C*255)/(width*height);
             pixels[i] = Color.rgb((int)result, (int)result, (int)result);
+        }
+        b.setPixels(pixels,0,width,0,0,width,height);
+    }
+
+    void colored_hea(Bitmap b){
+        int height = b.getHeight();
+        int width = b.getWidth();
+        int[] pixels = new int[height * width];
+        int C_r=0;
+        int C_g=0;
+        int C_b=0;
+        b.getPixels(pixels, 0, width, 0, 0, width, height);
+        int[] histo_r = new int[256];
+        int[] histo_g = new int[256];
+        int[] histo_b = new int[256];
+        for (int i = 0; i < height * width; i = i + 1) {
+            int color = pixels[i];
+            int red = (color >> 16) & 0xff;
+            int green = (color >> 8) & 0xff;
+            int blue = (color) & 0xff;
+            histo_r[red] = histo_r[red] + 1;
+            histo_g[green] = histo_g[green] + 1;
+            histo_b[blue] = histo_b[blue] + 1;
+        }
+        for (int i = 0; i < height * width; i = i + 1) {
+            C_r=0;
+            C_g=0;
+            C_b=0;
+            int color = pixels[i];
+            int red = (color >> 16) & 0xff;
+            int green = (color >> 8) & 0xff;
+            int blue = (color) & 0xff;
+            for (int j=0; j<red; j=j+1){
+                C_r=histo_r[j]+C_r;
+            }
+            for (int j=0; j<green; j=j+1){
+                C_g=histo_g[j]+C_g;
+            }
+            for (int j=0; j<blue; j=j+1){
+                C_b=histo_b[j]+C_b;
+            }
+
+            long result_r= (C_r*255)/(width*height);
+            long result_g= (C_g*255)/(width*height);
+            long result_b= (C_b*255)/(width*height);
+            pixels[i] = Color.rgb((int)result_r, (int)result_g, (int)result_b);
         }
         b.setPixels(pixels,0,width,0,0,width,height);
     }
