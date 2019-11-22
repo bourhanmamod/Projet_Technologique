@@ -1,18 +1,21 @@
 package com.example.myapplication;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.renderscript.Allocation;
+import androidx.renderscript.RenderScript;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+
+import com.android.rssample.ScriptC_gray;
+import com.android.rssample.ScriptC_gray2;
 
 import java.util.Random;
 
@@ -57,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         btn0.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
-                    public void onClick(View v) { 
+                    public void onClick(View v) {
                         bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.color);
                         original = bitmap.copy(bitmap.getConfig(), true);
                         bit = bitmap.copy(bitmap.getConfig(), true);
@@ -159,8 +162,44 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private  void  GrayRS(Bitmap  bmp) {
 
-    void to_Grey1(Bitmap b) {
+        RenderScript rs = RenderScript.create(this);
+
+
+        Allocation input = Allocation.createFromBitmap(rs , bmp);
+        Allocation output = Allocation.createTyped(rs, input.getType());
+        ScriptC_gray grayScript = new  ScriptC_gray(rs);
+
+        grayScript.forEach_toGray(input , output);
+        output.copyTo(bmp);
+
+        input.destroy ();
+        output.destroy ();grayScript.destroy();
+        rs.destroy();
+    }
+
+    private  void  Gray2RS(Bitmap  bmp) {
+
+        RenderScript rs = RenderScript.create(this);
+
+
+        Allocation input = Allocation.createFromBitmap(rs , bmp);
+        Allocation output = Allocation.createTyped(rs, input.getType());
+        ScriptC_gray2 grayScript = new  ScriptC_gray2(rs);
+
+        grayScript.forEach_toGray2(input , output);
+        output.copyTo(bmp);
+
+        input.destroy ();
+        output.destroy ();grayScript.destroy();
+        rs.destroy();
+    }
+
+
+
+
+        void to_Grey1(Bitmap b) {
         int height = b.getHeight();
         int width = b.getWidth();
 
