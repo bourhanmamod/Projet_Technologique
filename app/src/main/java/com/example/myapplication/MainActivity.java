@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         btn0.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
+                    public void onClick(View v) { 
                         bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.color);
                         original = bitmap.copy(bitmap.getConfig(), true);
                         bit = bitmap.copy(bitmap.getConfig(), true);
