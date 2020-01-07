@@ -11,6 +11,12 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import static com.example.myapplication.Color.reset;
+import static com.example.myapplication.HistogramEqualization.colored_histogram_Equalization_Algorithm;
+import static com.example.myapplication.HistogramEqualization.hea;
+import static com.example.myapplication.LinearDynamicExtension.colored_lde;
+import static com.example.myapplication.LinearDynamicExtension.lde;
+
 public class MainActivity extends AppCompatActivity {
     Bitmap bitmap, original, bit;
     ImageView image;
@@ -109,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         btn5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Color.reset(original, bit);
+                reset(original, bit);
 
             }
         });
@@ -118,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         btn6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Color.lde(bit);
+                lde(bit);
 
             }
         });
@@ -127,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         btn7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Color.colored_lde(bit);
+                colored_lde(bit);
 
             }
         });
@@ -136,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
         btn8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Color.hea(bit);
+                hea(bit);
 
             }
         });
@@ -145,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
         btn9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Color.colored_histogram_Egalization_Algorithm(bit);
+                colored_histogram_Equalization_Algorithm(bit);
 
             }
         });
@@ -158,7 +164,40 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+/*private  void  GrayRS(Bitmap bmp) {
 
+
+        RenderScript rs = RenderScript.create();
+
+
+        Allocation input = Allocation.createFromBitmap(rs , bmp);
+        Allocation output = Allocation.createTyped(rs, input.getType());
+        ScriptC_gray grayScript = new  ScriptC_gray(rs);
+
+        grayScript.forEach_toGray(input , output);
+        output.copyTo(bmp);
+
+        input.destroy ();
+        output.destroy ();grayScript.destroy();
+        rs.destroy();
+    }
+
+    private  void  Gray2RS(Bitmap  bmp) {
+
+        RenderScript rs = RenderScript.create();
+
+
+        Allocation input = Allocation.createFromBitmap(rs , bmp);
+        Allocation output = Allocation.createTyped(rs, input.getType());
+        ScriptC_gray2 grayScript = new  ScriptC_gray2(rs);
+
+        grayScript.forEach_toGray2(input , output);
+        output.copyTo(bmp);
+
+        input.destroy ();
+        output.destroy ();grayScript.destroy();
+        rs.destroy();
+    }*/
 
 
 
