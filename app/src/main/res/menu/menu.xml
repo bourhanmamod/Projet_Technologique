@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+    android:id = "@+id/item1"
+    android:title="Renderscript">
+        <menu>
+    <item
+        android:id = "@+id/subitem1"
+        android:title="Gray" />
+
+    <item
+        android:id = "@+id/subitem2"
+        android:title="Histogram Equalization" />
+
+    <item
+        android:id= "@+id/subitem3"
+        android:title="Linear Dynamic Extension"></item>
+
+    </menu>
+
+</item>
+    <item
+        android:id = "@+id/item2"
+        android:title="Gray"/>
+    <item
+        android:id = "@+id/item3"
+        android:title="Histogram Equalization">
+
+        <menu>
+            <item
+                android:id= "@+id/subitem4"
+                android:title="Color"/>
+
+            <item
+                android:id = "@+id/subitem5"
+                android:title="Black and White"/>
+
+        </menu>
+    </item>
+
+    <item
+        android:id= "@+id/item4"
+        android:title="Linear Dynamic Extention">
+
+        <menu>
+            <item
+                android:id="@+id/subitem6"
+                android:title="Color"/>
+
+            <item
+                android:id = "@+id/subitem7"
+                android:title="Black and White"/>
+
+        </menu>
+    </item>
+
+    <item
+        android:id= "@+id/item5"
+        android:title="Reset"
+        />
+
+    <item
+        android:id= "@+id/item6"
+        android:title="Change">
+
+        <menu>
+            <item
+                android:id= "@+id/subitem8"
+                android:title="To Spidy"/>
+
+            <item
+                android:id = "@+id/subitem9"
+                android:title="To Diagram"/>
+
+        </menu>
+    </item>
+
+    <item
+        android:id= "@+id/item7"
+        android:title="Other">
+
+        <menu>
+            <item
+                android:id= "@+id/subitem10"
+                android:title="Colorize"/>
+
+            <item
+                android:id = "@+id/subitem11"
+                android:title="Only Read"/>
+
+        </menu>
+    </item>
+
+
+</menu>
