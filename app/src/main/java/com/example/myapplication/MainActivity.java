@@ -14,12 +14,8 @@ import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.renderscript.Allocation;
-import androidx.renderscript.RenderScript;
 
-import static com.example.myapplication.Coloration.reset;
-import static com.example.myapplication.HistogramEqualization.colored_histogram_Equalization_Algorithm;
-import static com.example.myapplication.HistogramEqualization.hea;
+
 
 public class MainActivity extends AppCompatActivity {
     Bitmap bitmap, original, bit;
@@ -74,8 +70,8 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.item2:
                 Toast.makeText(this, "Gray", Toast.LENGTH_SHORT).show();
-                //Gray.to_Grey2(bit);
-                GrayRS(bit);
+                Gray.to_Grey2(bit);
+                //GrayRS(bit);
                 return true;
 
             case R.id.item3:
@@ -84,17 +80,16 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.subitem4:
                 Toast.makeText(this, "Histogram Equalization Color", Toast.LENGTH_SHORT).show();
-                colored_histogram_Equalization_Algorithm(bit);
+                HistogramEqualization.colored_histogram_Equalization_Algorithm(bit);
                 return true;
 
             case R.id.subitem5:
                 Toast.makeText(this, "Histogram Equalization Black & White", Toast.LENGTH_SHORT).show();
-                hea(bit);
+                HistogramEqualization.hea(bit);
                 return true;
 
             case R.id.item4:
                 Toast.makeText(this, "Linear Dynamic Extension", Toast.LENGTH_SHORT).show();
-                LinearDynamicExtension.lde(bit);
                 return true;
 
             case R.id.subitem6:
@@ -104,11 +99,12 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.subitem7:
                 Toast.makeText(this, "Linear Dynamic Extension Black & White", Toast.LENGTH_SHORT).show();
+                LinearDynamicExtension.lde(bit);
                 return true;
 
             case R.id.item5:
                 Toast.makeText(this, "Reset", Toast.LENGTH_SHORT).show();
-                reset(original, bit);
+                Coloration.reset(original, bit);
                 return true;
 
             case R.id.item6:
@@ -118,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.subitem8:
                 Toast.makeText(this, "Spiderman Image selected", Toast.LENGTH_SHORT).show();
-                change_toSpidy();
+                change_toSpiderman();
                 return true;
 
             case R.id.subitem9:
@@ -148,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    void change_toSpidy(){
+    void change_toSpiderman(){
         bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.spidy);
         original = bitmap.copy(bitmap.getConfig(), true);
         bit = bitmap.copy(bitmap.getConfig(), true);
@@ -160,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    void change_toDiagram(){
+    private void change_toDiagram(){
         bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.color);
         original = bitmap.copy(bitmap.getConfig(), true);
         bit = bitmap.copy(bitmap.getConfig(), true);
@@ -173,22 +169,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private  void  GrayRS(Bitmap  bmp) {
-
-        RenderScript rs = RenderScript.create(this);
-
-
-        Allocation input = Allocation.createFromBitmap(rs , bmp);
-        Allocation output = Allocation.createTyped(rs, input.getType());
-        ScriptC_gray grayScript = new  ScriptC_gray(rs);
-
-        grayScript.forEach_toGray(input , output);
-        output.copyTo(bmp);
-
-        input.destroy ();
-        output.destroy ();grayScript.destroy();
-        rs.destroy();
-    }
 
 
 }

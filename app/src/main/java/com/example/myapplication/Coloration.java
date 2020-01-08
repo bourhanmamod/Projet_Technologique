@@ -48,7 +48,6 @@ class Coloration {
 
     }
 
-
     static void only_red(Bitmap b) {
         int height = b.getHeight();
         int width = b.getWidth();
