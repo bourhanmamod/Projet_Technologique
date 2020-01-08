@@ -23,7 +23,7 @@ class Gray {
         }
     }
 
-    void to_Grey2(Bitmap b) {
+    static void to_Grey2(Bitmap b) {
         int height = b.getHeight();
         int width = b.getWidth();
         int[] pixels = new int[height * width];

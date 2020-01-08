@@ -20,7 +20,7 @@ class LinearDynamicExtension {
             int color = pixels[i];
             int red = Color.red(color);
             int c = lut[red];
-            pixels[i] = android.graphics.Color.rgb(c, c, c);
+            pixels[i] = Color.rgb(c, c, c);
         }
         b.setPixels(pixels, 0, width, 0, 0, width, height);
     }
@@ -80,7 +80,7 @@ class LinearDynamicExtension {
             int r = lut_r[red];
             int g = lut_g[green];
             int bl = lut_b[blue];
-            pixels[i] = android.graphics.Color.rgb(r, g, bl);
+            pixels[i] = Color.rgb(r, g, bl);
         }
         b.setPixels(pixels, 0, width, 0, 0, width, height);
     }

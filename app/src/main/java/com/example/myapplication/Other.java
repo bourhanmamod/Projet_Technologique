@@ -18,7 +18,7 @@ class Other {
         int[] h= new int[size];
         h[0]= histogram[0];
         for(int i = 1 ; i<size ; i=i+1){
-            h[i]= histogram[i-1] + histogram[i];
+            h[i]= h[i-1] + histogram[i];
         }
         return h;
     }

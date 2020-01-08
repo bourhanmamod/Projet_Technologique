@@ -2,7 +2,7 @@ package com.example.myapplication;
 
 public class HSVColor {
 
-    int HSVToColor(float[] hsv) {
+    static int HSVToColor(float[] hsv) {
         int v = (int) hsv[2];
         int t = (int) ((hsv[0] / 60) % 6);
         int f = (int) ((hsv[0] / 60) - t);
@@ -25,26 +25,26 @@ public class HSVColor {
     }
 
 
-    //A MODIFIER
-    void RGBToHSV(int red, int green, int blue, float[] hsv) {
+    //A MODIFIER car ne fonctionne pas
+    static void RGBToHSV(int red, int green, int blue, float[] hsv) {
 
-        float min = Math.min(red, Math.min(green, blue));
-        float max = Math.max(red, Math.max(green, blue));
+        int min = Math.min(red, Math.min(green, blue));
+        int max = Math.max(red, Math.max(green, blue));
         if (max == min) {
             hsv[0] = 0;
         } else if (max == red) {
-            hsv[0] = ((60 * (green - blue) / (max - min)) + 360) % 360;
+            hsv[0] = ((60 * ((float) (green - blue)) / ((float)(max - min)) + 360) % 360);
         } else if (max == green) {
-            hsv[0] = (60 * (blue - red) / (max - min)) + 120;
+            hsv[0] =  ((60 * ((float) (blue - red)) / ((float) (max - min))) + 120);
         } else if (max == blue) {
-            hsv[0] = (60 * (red - green) / (max - min)) + 240;
+            hsv[0] =  ((60 * ((float) (red - green)) / ((float) (max - min))) + 240);
 
         }
 
         if (max == 0) {
             hsv[1] = 0;
         } else {
-            hsv[1] = 1 - (min / max);
+            hsv[1] = 1 - ((float) min / (float) max);
         }
         hsv[2] = max;
     }
