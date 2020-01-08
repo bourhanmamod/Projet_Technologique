@@ -7,13 +7,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
+
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.renderscript.Allocation;
 import androidx.renderscript.RenderScript;
@@ -21,9 +20,6 @@ import androidx.renderscript.RenderScript;
 import static com.example.myapplication.Coloration.reset;
 import static com.example.myapplication.HistogramEqualization.colored_histogram_Equalization_Algorithm;
 import static com.example.myapplication.HistogramEqualization.hea;
-import static com.example.myapplication.LinearDynamicExtension.colored_lde;
-import static com.example.myapplication.LinearDynamicExtension.lde;
-import static com.example.myapplication.R.menu.menu;
 
 public class MainActivity extends AppCompatActivity {
     Bitmap bitmap, original, bit;
@@ -57,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case R.id.item1:
                 Toast.makeText(this, "Renderscript", Toast.LENGTH_SHORT).show();
@@ -78,7 +74,8 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.item2:
                 Toast.makeText(this, "Gray", Toast.LENGTH_SHORT).show();
-                Gray.to_Grey2(bit);
+                //Gray.to_Grey2(bit);
+                GrayRS(bit);
                 return true;
 
             case R.id.item3:
@@ -176,9 +173,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private  void  Gray2RS(Bitmap  bmp) {
+    private  void  GrayRS(Bitmap  bmp) {
 
-        RenderScript rs = RenderScript.create();
+        RenderScript rs = RenderScript.create(this);
 
 
         Allocation input = Allocation.createFromBitmap(rs , bmp);
