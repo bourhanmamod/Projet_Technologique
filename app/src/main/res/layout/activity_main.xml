@@ -9,29 +9,24 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="-99dp"
-        tools:layout_editor_absoluteY="-26dp">
-
+        tools:layout_editor_absoluteX="174dp"
+        tools:layout_editor_absoluteY="16dp">
 
 
         <ImageView
-            android:id="@+id/color"
+            android:id="@+id/Ia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/color"></ImageView>
+            android:layout_centerInParent="true"
+            android:minHeight="500dp"
+            android:minWidth="500dp"></ImageView>
 
-        <TextView
-            android:id="@+id/textView"
+        <Button
+            android:id="@+id/camera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/color"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginStart="7dp"
-            android:layout_marginLeft="7dp"
-            android:layout_marginTop="78dp" />
+            android:onClick="launchCamera"
+            android:text="Camera"></Button>
 
 
     </RelativeLayout>

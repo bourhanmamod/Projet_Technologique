@@ -60,21 +60,6 @@
         android:title="Reset"
         />
 
-    <item
-        android:id= "@+id/item6"
-        android:title="Change">
-
-        <menu>
-            <item
-                android:id= "@+id/subitem8"
-                android:title="To Spidy"/>
-
-            <item
-                android:id = "@+id/subitem9"
-                android:title="To Diagram"/>
-
-        </menu>
-    </item>
 
     <item
         android:id= "@+id/item7"
